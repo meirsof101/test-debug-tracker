@@ -1,0 +1,23 @@
+{
+  "name": "mern-testing",
+  "version": "1.0.0",
+  "scripts": {
+    "install-all": "pnpm install && cd client && pnpm install && cd ../server && pnpm install",
+    "test": "npm run test:client && npm run test:server",
+    "test:unit": "npm run test:unit:client && npm run test:unit:server",
+    "test:integration": "npm run test:integration:client && npm run test:integration:server",
+    "test:e2e": "cd client && npm run test:e2e",
+    "test:client": "cd client && npm test",
+    "test:server": "cd server && npm test",
+    "test:unit:client": "cd client && npm run test:unit",
+    "test:unit:server": "cd server && npm run test:unit",
+    "test:integration:client": "cd client && npm run test:integration",
+    "test:integration:server": "cd server && npm run test:integration",
+    "test:coverage": "npm run test:coverage:client && npm run test:coverage:server",
+    "test:coverage:client": "cd client && npm run test:coverage",
+    "test:coverage:server": "cd server && npm run test:coverage"
+  },
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
