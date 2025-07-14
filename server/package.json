@@ -20,11 +20,14 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "test": "jest",
+    "test:watch": "jest --watch",
     "test:unit": "jest --testPathPattern=unit",
     "test:integration": "jest --testPathPattern=integration",
     "test:coverage": "jest --coverage",
     "setup-test-db": "node tests/setup-test-db.js",
-      "cypress:open": "cypress open",
-      "cypress:run": "cypress run"
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test:verbose": "VERBOSE_TESTS=true jest --verbose",
+    "test:debug": "jest --detectOpenHandles --verbose"
   }
 }

@@ -15,14 +15,14 @@ describe('UserForm Component', () => {
 
     fireEvent.change(nameInput, { target: { value: 'John Doe' } });
     fireEvent.change(emailInput, { target: { value: 'john@example.com' } });
-    fireEvent.change(passwordInput, { target: { value: '' } });  // if password empty in test
+    fireEvent.change(passwordInput, { target: { value: 'password123' } });  // if password empty in test
 
     fireEvent.click(submitButton);
 
     expect(mockOnSubmit).toHaveBeenCalledWith({
       name: 'John Doe',
       email: 'john@example.com',
-      password: '',
+      password: 'password123',
     });
   });
 
