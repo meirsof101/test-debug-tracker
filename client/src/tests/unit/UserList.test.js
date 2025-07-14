@@ -1,12 +1,13 @@
-// client/src/__tests__/unit/UserList.test.js
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
 import UserList from '../../components/UserList';
-import { useUsers } from '../../hooks/useUsers';
 
-// Mock the custom hook
-jest.mock('../../hooks/useUsers');
+// Mock the useUsers hook
+jest.mock('../../hooks/useUsers', () => ({
+  useUsers: jest.fn()
+}));
+
+const { useUsers } = require('../../hooks/useUsers');
 
 describe('UserList Component', () => {
   beforeEach(() => {
@@ -28,17 +29,17 @@ describe('UserList Component', () => {
     useUsers.mockReturnValue({
       users: [],
       loading: false,
-      error: 'Failed to fetch users'
+      error: 'Failed to fetch'
     });
 
     render(<UserList />);
-    expect(screen.getByText('Error: Failed to fetch users')).toBeInTheDocument();
+    expect(screen.getByText('Error: Failed to fetch')).toBeInTheDocument();
   });
 
-  test('renders users list', async () => {
+  test('renders users list', () => {
     const mockUsers = [
-      { _id: '1', name: 'John Doe', email: 'john@example.com' },
-      { _id: '2', name: 'Jane Smith', email: 'jane@example.com' }
+      { id: 1, name: 'John Doe', email: 'john@example.com' },
+      { id: 2, name: 'Jane Smith', email: 'jane@example.com' }
     ];
 
     useUsers.mockReturnValue({
@@ -48,11 +49,9 @@ describe('UserList Component', () => {
     });
 
     render(<UserList />);
-    
-    await waitFor(() => {
-      expect(screen.getByText('John Doe')).toBeInTheDocument();
-      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
-    });
+    expect(screen.getByText('Users')).toBeInTheDocument();
+    expect(screen.getByText('John Doe - john@example.com')).toBeInTheDocument();
+    expect(screen.getByText('Jane Smith - jane@example.com')).toBeInTheDocument();
   });
 
   test('renders empty state when no users', () => {

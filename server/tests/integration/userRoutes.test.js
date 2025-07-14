@@ -2,7 +2,7 @@
 const request = require('supertest');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const mongoose = require('mongoose');
-const app = require('../../src/app');
+const app = require('../../src');
 const User = require('../../src/models/User');
 
 describe('User Routes Integration', () => {
