@@ -60,7 +60,7 @@ const UserForm = ({ onSubmit }) => {
           onChange={handleChange}
         />
       </div>
-      <button type="submit">Submit</button>
+      <button type="submit">Create User</button>
     </form>
   );
 };
