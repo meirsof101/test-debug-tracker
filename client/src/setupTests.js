@@ -1,8 +1,8 @@
-// client/src/tests/setupTests.js
 import '@testing-library/jest-dom';
+import fetchMock from 'jest-fetch-mock';
 
-// Mock fetch globally for all tests
-global.fetch = jest.fn();
+fetchMock.enableMocks();  // <-- This is critical!
+console.log('fetch.resetMocks is', fetch.resetMocks);
 
 // Mock console.error to avoid noise in tests
 const originalError = console.error;
@@ -14,12 +14,10 @@ afterAll(() => {
   console.error = originalError;
 });
 
-// Reset fetch mock before each test
 beforeEach(() => {
-  fetch.mockClear();
+  fetch.resetMocks();   // This only works after enableMocks()
 });
 
-// Clean up after each test
 afterEach(() => {
   jest.restoreAllMocks();
 });

@@ -28,7 +28,7 @@ module.exports = {
         '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
         '\\.(jpg|jpeg|png|gif|webp|svg)$': '<rootDir>/client/src/tests/__mocks__/fileMock.js',
       },
-      setupFilesAfterEnv: ['<rootDir>/client/src/tests/setup.js'],
+      setupFilesAfterEnv: ['<rootDir>/client/tests/setup.js'],
       transform: {
         '^.+\\.(js|jsx)$': 'babel-jest',
       },
