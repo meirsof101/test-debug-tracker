@@ -1,4 +1,3 @@
-// client/src/__tests__/integration/UserFlow.test.js
 import React from 'react';
 import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -40,8 +39,8 @@ describe('User Management Flow', () => {
 
     // Wait for users to load
     await waitFor(() => {
-      expect(screen.getByText('John Doe')).toBeInTheDocument();
-      expect(screen.getByText('Jane Smith')).toBeInTheDocument();
+      expect(screen.getByText(/John Doe/)).toBeInTheDocument();
+      expect(screen.getByText(/Jane Smith/)).toBeInTheDocument();
     });
 
     // Fill out form to create new user

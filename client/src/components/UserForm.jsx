@@ -7,6 +7,8 @@ const UserForm = ({ onSubmit }) => {
     password: ''
   });
 
+  const [errors, setErrors] = useState({});
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -15,10 +17,26 @@ const UserForm = ({ onSubmit }) => {
     }));
   };
 
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.name.trim()) newErrors.name = 'Name is required';
+    if (!formData.email.trim()) newErrors.email = 'Email is required';
+    if (!formData.password.trim()) newErrors.password = 'Password is required';
+    return newErrors;
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setErrors({});
     onSubmit(formData);
-    // Clear form after submission
+
+    // Clear form
     setFormData({
       name: '',
       email: '',
@@ -36,8 +54,8 @@ const UserForm = ({ onSubmit }) => {
           name="name"
           value={formData.name}
           onChange={handleChange}
-          required
         />
+        {errors.name && <p>{errors.name}</p>}
       </div>
       <div>
         <label htmlFor="email">Email:</label>
@@ -47,8 +65,8 @@ const UserForm = ({ onSubmit }) => {
           name="email"
           value={formData.email}
           onChange={handleChange}
-          required
         />
+        {errors.email && <p>{errors.email}</p>}
       </div>
       <div>
         <label htmlFor="password">Password:</label>
@@ -59,6 +77,7 @@ const UserForm = ({ onSubmit }) => {
           value={formData.password}
           onChange={handleChange}
         />
+        {errors.password && <p>{errors.password}</p>}
       </div>
       <button type="submit">Create User</button>
     </form>
